@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/Hero.css";
 import logo from "./Images/heroimg2.png";
-import {Link} from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 
 const Hero = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Optionally clear the state to prevent re-scrolling on subsequent renders
+        // However, for this simple scroll, it might not be strictly necessary.
+      }
+    }
+  }, [location.state]); // Re-run effect when location.state changes
+
   return (
     <div className="HeroBody">
       {/* First Section - Hero */}

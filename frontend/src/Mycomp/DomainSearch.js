@@ -60,7 +60,6 @@ const DomainSearch = () => {
                 value={searchTerm}
                 placeholder="Enter Domain Name"
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ width: "500px" }}
               />
               <div className="btn-bar">
                 <button type="submit" className="btn">
@@ -80,7 +79,14 @@ const DomainSearch = () => {
                 {roadmaps.map((roadmap, idx) => (
                   <div key={idx} className="card-body">
                     <img src={roadmap.image_url} alt={roadmap.title} style={{ width: "100%", height: "auto" }} />
-                    <h3>{roadmap.title}</h3>
+                    <h3>About Image:</h3>
+                    <p>{roadmap.title}</p>
+                    <button 
+                      className="repo-link-btn btn"
+                      onClick={() => window.open(roadmap.image_url, '_blank', 'noopener,noreferrer')}
+                    >
+                      Open
+                    </button>
                   </div>
                 ))}
               </div>
@@ -93,13 +99,15 @@ const DomainSearch = () => {
               <div className="popdomains courses-grid">
                 {githubRepos.map((repo, idx) => (
                   <div key={idx} className="card-body">
-                    <h3>
-                      <a href={repo.url} target="_blank" rel="noopener noreferrer">
-                        {repo.name}
-                      </a>
-                    </h3>
+                    <h3>Description</h3>
+                    <p className="stars">⭐ {repo.stars}</p>
                     <p>{repo.description}</p>
-                    <p>⭐ {repo.stars}</p>
+                    <button 
+                      className="repo-link-btn btn"
+                      onClick={() => window.open(repo.url, '_blank', 'noopener,noreferrer')}
+                    >
+                      View Repository
+                    </button>
                   </div>
                 ))}
               </div>
