@@ -13,33 +13,66 @@ const DomainSearch = () => {
   const [roadmaps, setRoadmaps] = useState([]);
   const [githubRepos, setGithubRepos] = useState([]);
 
+  const [youtubePlaylists, setYoutubePlaylists] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
-  
+
     setLoading(true);
     setError(null);
-  
+
     try {
+      // const BASE_URL = "http://127.0.0.1:8000";
+      // const roadmapRes = await fetch(`${BASE_URL}/api/roadmaps?query=${searchTerm}`);
+      // const githubRes = await fetch(`${BASE_URL}/api/github?query=${searchTerm}`);
+      // const ytRes = await fetch(`${BASE_URL}/api/youtube?query=${searchTerm}`);
+      // const blogRes = await fetch(`${BASE_URL}/api/blogs?query=${searchTerm}`);
+
       // Fetch roadmaps
       const roadmapRes = await fetch(`https://subjectify-0t9q.onrender.com/api/roadmaps?query=${searchTerm}`);
       const roadmapData = await roadmapRes.json();
-  
+
       // Fetch GitHub repos
       const githubRes = await fetch(`https://subjectify-0t9q.onrender.com/api/github?query=${searchTerm}`);
       const githubData = await githubRes.json();
-  
+
+      // Fetch YouTube
+      const ytRes = await fetch(`https://subjectify-0t9q.onrender.com/api/youtube?query=${searchTerm}`);
+      const ytData = await ytRes.json();
+
+      // Fetch Blogs
+      const blogRes = await fetch(`https://subjectify-0t9q.onrender.com/api/blogs?query=${searchTerm}`);
+      const blogData = await blogRes.json();
+
       setRoadmaps(roadmapData.results || []);
       setGithubRepos(githubData.results || []);
+      setYoutubePlaylists(ytData.results || []);
+      setBlogs(blogData.results || []);
+
+      // Collect messages if any
+      let messages = [];
+      if (roadmapData.message) messages.push(roadmapData.message);
+      if (ytData.message) messages.push(ytData.message);
+      if (blogData.message) messages.push(blogData.message);
+
+      if (messages.length > 0) {
+        setError(messages.join(" | "));
+      }
+
     } catch (err) {
       console.error(err);
       setError('Failed to fetch results. Please try again.');
       setRoadmaps([]);
       setGithubRepos([]);
+      setYoutubePlaylists([]);
+      setBlogs([]);
     } finally {
       setLoading(false);
     }
   };
+
 
   // const handleCourseClick = (courseId) => {
   //   navigate(`/course/${courseId}`);
@@ -113,6 +146,47 @@ const DomainSearch = () => {
               </div>
             </>
           )}
+
+          {youtubePlaylists.length > 0 && (
+            <>
+              <h2 className="poptitle">YouTube Playlists</h2>
+              <div className="popdomains courses-grid">
+                {youtubePlaylists.map((playlist, idx) => (
+                  <div key={idx} className="card-body">
+                    <img src={playlist.thumbnail} alt={playlist.title} style={{ width: "100%", height: "auto" }} />
+                    <h3>{playlist.title}</h3>
+                    <p>{playlist.channelTitle}</p>
+                    <button
+                      className="repo-link-btn btn"
+                      onClick={() => window.open(`https://www.youtube.com/playlist?list=${playlist.playlistId}`, '_blank', 'noopener,noreferrer')}
+                    >
+                      Watch
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {blogs.length > 0 && (
+            <>
+              <h2 className="poptitle">Relevant Blogs</h2>
+              <div className="popdomains courses-grid">
+                {blogs.map((article, idx) => (
+                  <div key={idx} className="card-body">
+                    <h3>{article.title}</h3>
+                    <button
+                      className="repo-link-btn btn"
+                      onClick={() => window.open(article.url, '_blank', 'noopener,noreferrer')}
+                    >
+                      Read
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
 
         </div>
       </div>

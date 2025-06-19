@@ -1,22 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./styles/Hero.css";
 import logo from "./Images/heroimg2.png";
-import {Link, useLocation} from "react-router-dom"
+import {Link} from "react-router-dom"
 
 const Hero = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.state && location.state.scrollTo) {
-      const element = document.getElementById(location.state.scrollTo);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        // Optionally clear the state to prevent re-scrolling on subsequent renders
-        // However, for this simple scroll, it might not be strictly necessary.
-      }
-    }
-  }, [location.state]); // Re-run effect when location.state changes
-
   return (
     <div className="HeroBody">
       {/* First Section - Hero */}
@@ -44,24 +31,24 @@ const Hero = () => {
         <div className="section-content">
           <h5>About Us</h5>
           <h1>Transforming Education</h1>
-          <p className="section-description">
-            At Subjectify, we're revolutionizing education through personalized learning experiences.
-            Our platform connects learners with expert-curated content, making quality education
-            accessible to everyone. We believe in empowering individuals to take control of their
-            learning journey with our innovative approach to education.
+          <p style={{textAlign: "center"}} className="section-description">
+            At Subjectify, We combine the power of automation and intelligent design to gather and present 
+            the most relevant learning materials from across the web—be it GitHub repositories, video 
+            tutorials, roadmaps, or articles. With LearnMap, learners can focus on acquiring skills while 
+            we handle the search and structure. 
           </p>
           <div className="stats-container">
             <div className="stat-item">
-              <h3>10K+</h3>
-              <p>Active Learners</p>
+              <h3>200+</h3>
+              <p>Roadmaps Curated</p>
             </div>
             <div className="stat-item">
-              <h3>500+</h3>
-              <p>Courses</p>
+              <h3>300+</h3>
+              <p>Topics Covered </p>
             </div>
             <div className="stat-item">
-              <h3>95%</h3>
-              <p>Success Rate</p>
+              <h3>50+</h3>
+              <p>Users Helped</p>
             </div>
           </div>
         </div>
@@ -78,33 +65,54 @@ const Hero = () => {
             brings unique expertise to help you achieve your learning goals.
           </p>
           <div className="team-grid">
-            <div className="team-member">
-              <h3>Miss Hamza Ahmed</h3>
-              <p>Lead Educational Strategist</p>
+            {/* <div className="team-member">
+              <h3>Hamza Ahmed</h3>
+              <p>React Developer</p>
               <p className="member-desc">15+ years in curriculum development</p>
             </div>
             <div className="team-member">
               <h3>Affan Abid</h3>
-              <p>Sweeper</p>
-              <p className="member-desc">Expert in Cleaning</p>
+              <p>Python Developer</p>
+              <p className="member-desc">Python Developer</p>
             </div>
             <div className="team-member">
               <h3>Musa Arfah</h3>
-              <p>Learner</p>
-              <p className="member-desc">Specialist in personalized learning and adaptive education systems</p>
+              <p>Python Developer</p>
+              <p className="member-desc">Python Developer</p>
             </div>
             <div className="team-member">
               <h3>Taimour Hassan</h3>
-              <p>Technical Specialist</p>
-              <p className="member-desc">Specialist in FrontEnd</p>
-            </div>
+              <p>React Developer</p>
+              <p className="member-desc">React Developer</p>
+            </div> */}
+            <div className="team-member"><a href="#" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none", color: "black"}}>
+              <h3>Hamza Ahmed</h3>
+              <p>React Developer</p>
+              <p className="member-desc">Built core frontend components and handled UI state management.</p>
+            </a></div>
+            <div className="team-member"><a href="https://affanabid.github.io" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none", color: "black"}}>
+              <h3>Affan Abid</h3>
+              <p>Python Developer</p>
+              <p className="member-desc">Designed and implemented the backend API and data scraping logic.</p>
+              </a></div>
+            <div className="team-member"><a href="#" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none", color: "black"}}>
+              <h3>Musa Arfah</h3>
+              <p>Python Developer</p>
+              <p className="member-desc">Contributed to backend routing, data formatting, and integration testing.</p>
+            </a></div>
+            <div className="team-member"><a href="http://taimour-hssn1.github.io" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none", color: "black"}}>
+              <h3>Taimour Hassan</h3>
+              <p>React Developer</p>
+              <p className="member-desc">Worked on responsive layout and API integration with the UI.</p>
+              </a></div>
+
 
           </div>
         </div>
       </div>
 
       {/* Fourth Section - Contact */}
-      <div id="contact" className="hero">
+      {/* <div id="contact" className="hero">
         <div className="section-content">
           <h5>Get in Touch</h5>
           <h1>Contact Us</h1>
@@ -116,7 +124,7 @@ const Hero = () => {
           <div className="contact-info">
             <div className="contact-item">
               <h3>Email</h3>
-              <p>blah@subjectify.com</p>
+              <p>contact@subjectify.com</p>
               <p className="contact-desc">24/7 Support Available</p>
             </div>
             <div className="contact-item">
@@ -131,7 +139,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
